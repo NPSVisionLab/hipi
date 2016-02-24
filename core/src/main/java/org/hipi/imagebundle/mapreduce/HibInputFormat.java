@@ -77,7 +77,6 @@ public class HibInputFormat extends FileInputFormat<HipiImageHeader, HipiImage> 
     // Read number of requested map tasks from job configuration
     Configuration conf = job.getConfiguration();
     int numMapTasks = conf.getInt("hipi.map.tasks", 0);
-    //numMapTasks = 1;
     // Initialize list of InputSplits
     List<InputSplit> splits = new ArrayList<InputSplit>();
 

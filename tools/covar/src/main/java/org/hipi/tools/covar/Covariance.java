@@ -113,9 +113,6 @@ public class Covariance extends Configured implements Tool {
     conf.set("yarn.scheduler.maximum-allocation-mb", "5000");
     */
 
-
-
-    
     // Validate arguments before any work is done
     validateArgs(args, conf);
     

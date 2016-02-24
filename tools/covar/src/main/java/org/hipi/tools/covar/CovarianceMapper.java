@@ -133,8 +133,6 @@ public class CovarianceMapper extends
     
     Mat[] patches = new Mat[iMax * jMax];
     
-
-
     // Create mean-subtracted and gaussian-masked patches
     for (int i = 0; i < iMax; i++) {
       int x = (cvImage.cols() - N) * i / iMax;

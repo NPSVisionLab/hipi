@@ -17,8 +17,6 @@ import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 
 /**
  * Main MapReduce {@link RecordReader} class for HIB files. Utilizes 
@@ -32,24 +30,10 @@ public class HibRecordReader extends RecordReader<HipiImageHeader, HipiImage> {
   private Configuration conf;
   private HipiImageBundle.HibReader reader;
 
-    public static void printclasspath() {
-
-        //Get the System Classloader
-	ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
-	//Get the URLs
-	URL[] urls = ((URLClassLoader)sysClassLoader).getURLs();
-	for(int i=0; i< urls.length; i++)
-	{
-	    System.out.println(urls[i].getFile());
-	}
-  }
-	
-
   @Override
   public void initialize(InputSplit split, TaskAttemptContext context) 
   throws IOException, IllegalArgumentException {
 
-    printclasspath();
     HipiImageFactory imageFactory = null;
     try {
       imageFactory = new HipiImageFactory(context.getMapperClass());

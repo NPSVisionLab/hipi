@@ -13,20 +13,13 @@ import org.bytedeco.javacpp.opencv_core.Scalar;
 
 import java.io.IOException;
 
-
-
 public class MeanMapper extends 
   Mapper<HipiImageHeader, FloatImage, IntWritable, OpenCVMatWritable> {
-
-
-
-
 
   @Override
   public void map(HipiImageHeader header, FloatImage image, Context context) throws IOException,
       InterruptedException {
     
-
     /////
     // Perform conversion to OpenCV
     /////
@@ -52,17 +45,11 @@ public class MeanMapper extends
     int iMax = 10;
     int jMax = 10;
 
-    //debug
-    //String dbstr = String.format("image size %d, %d\n", cvImage.rows(), cvImage.cols());
-    //System.out.println(dbstr);
     //collect patches and add their values to mean patch mat
     for (int i = 0; i < iMax; i++) {
       int x = ((cvImage.cols() - N) * i) / iMax;
       for (int j = 0; j < jMax; j++) {
         int y = ((cvImage.rows() - N) * j) / jMax;
-    //debug
-    //dbstr = String.format("patch size %d, %d, %d, %d\n", x, y, N, N);
-    //System.out.println(dbstr);
 	    if (N > cvImage.cols()-1 || N > cvImage.rows()-1)
 	        continue;
         Mat patch = cvImage.apply(new Rect(x, y, N, N));
