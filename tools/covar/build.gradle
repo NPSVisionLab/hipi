@@ -1,0 +1,16 @@
+jar {
+	manifest {
+		attributes("Main-Class": "org.hipi.tools.covar.Covariance")
+	}
+}
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Convar fat jar',  
+        	'Main-Class': 'org.hipi.tools.covar.Covariance'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+

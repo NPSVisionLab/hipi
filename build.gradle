@@ -1,0 +1,64 @@
+defaultTasks 'install'
+
+allprojects {  
+  apply plugin: 'eclipse'
+}
+
+subprojects {
+
+  apply plugin: 'java'
+
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    compile files('/home/trbatcha/javacpp-presets/target/javacpp.jar',
+                  '/home/trbatcha/javacpp-presets/target/opencv-linux-x86_64.jar',
+                  '/home/trbatcha/javacpp-presets/target/opencv.jar',
+                  '/home/trbatcha/TwelveMonkeys/imageio/imageio-jpeg/target/twelvemonkeys-imageio-jpeg-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/imageio/imageio-pnm/target/twelvemonkeys-imageio-pnm-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/imageio/imageio-tiff/target/twelvemonkeys-imageio-tiff-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/imageio/imageio-core/target/twelvemonkeys-imageio-core-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/common/common-lang/target/twelvemonkeys-common-lang-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/common/common-io/target/twelvemonkeys-common-io-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/imageio/imageio-metadata/target/twelvemonkeys-imageio-metadata-3.3-SNAPSHOT.jar',
+                  '/home/trbatcha/TwelveMonkeys/common/common-image/target/twelvemonkeys-common-image-3.3-SNAPSHOT.jar'
+    )
+    compile 'org.apache.hadoop:hadoop-common:2.7.1'
+    compile 'org.apache.hadoop:hadoop-mapreduce-client-core:2.7.1'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    compile 'com.drewnoakes:metadata-extractor:2.8.1'
+    testCompile "junit:junit:4+"
+  }
+
+}
+
+task install {
+  dependsOn(':tools:hibImport:jar')
+  dependsOn(':tools:hibDownload:jar')
+  dependsOn(':tools:hibInfo:jar')
+  dependsOn(':tools:hibToJpeg:jar')
+  dependsOn(':tools:hibDump:jar')
+
+  dependsOn(':tools:covar:jar')
+  dependsOn(':tools:imageSize:jar')
+
+  doLast {
+    println '\nFinished building the HIPI library along with all tools and examples.'
+  }
+}
+group 'hipi'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
